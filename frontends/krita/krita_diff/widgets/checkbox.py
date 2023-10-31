@@ -59,6 +59,8 @@ class QMultiCheckBoxLayout(QVBoxLayout):
         # TODO: flexbox-like row breaking
         self.row = QHBoxLayout()
         self.qcheckboxes = []
+        if isinstance(self.options_cfg, list):
+            self.options_cfg = [item for row in self.options_cfg for item in row]
         for opt in self.options_cfg:
             checkbox = _QCheckBox(opt)
             self.qcheckboxes.append(checkbox)

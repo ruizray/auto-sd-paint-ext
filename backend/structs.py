@@ -38,6 +38,7 @@ class Img2ImgRequest(DefaultImg2ImgOptions):
     """Image being used."""
     mask_img: Optional[str] = None
     """Image mask being used."""
+    username = "krita"
 
 
 @optional

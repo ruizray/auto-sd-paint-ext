@@ -95,7 +95,7 @@ async def get_state():
         "scripts_img2img": get_scripts_metadata(True),
         "face_restorers": [model.name() for model in shared.face_restorers],
         "sd_models": modules.sd_models.checkpoint_tiles(),  # yes internal API has spelling error
-        "sd_vaes": ["None", "Automatic" ] + (list(modules.sd_vae.vae_dict))
+        "sd_vaes": ["None", "Automatic"] + (list(modules.sd_vae.vae_dict)),
     }
 
 
@@ -264,7 +264,7 @@ def f_img2img(req: Img2ImgRequest):
         req.batch_count,  # n_iter
         req.batch_size,  # batch_size
         req.cfg_scale,  # cfg_scale
-        0, # img_cfg_scale (unsupported)
+        0,  # img_cfg_scale (unsupported)
         req.denoising_strength,  # denoising_strength
         req.seed,  # seed
         req.subseed,  # subseed
@@ -284,6 +284,10 @@ def f_img2img(req: Img2ImgRequest):
         "",  # img2img_batch_output_dir (unsupported)
         "",  # img2img_batch_inpaint_mask_dir (unsupported)
         [],  # override_settings_texts (unsupported)
+        False,
+        [],
+        "",
+        req,
         *args,
     )
     images = output[0]

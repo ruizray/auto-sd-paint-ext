@@ -66,15 +66,19 @@ class QComboBoxLayout(QHBoxLayout):
         self.addWidget(self.qcombo)
 
     def cfg_init(self):
-        opts = sorted(
-            set(
-                self.cfg(self.options_cfg, "QStringList")
-                if isinstance(self.options_cfg, str)
-                else self.options_cfg
-            ),
-            key=str.casefold,
-        )
-
+        if isinstance(self.options_cfg, list):
+            self.options_cfg = [item for row in self.options_cfg for item in row]
+        try:
+            opts = sorted(
+                set(
+                    self.cfg(self.options_cfg, "QStringList")
+                    if isinstance(self.options_cfg, str)
+                    else self.options_cfg
+                ),
+                key=str.casefold,
+            )
+        except Exception as e:
+            raise Exception(self.options_cfg)
         # NOTE: assumes the None option will always be labelled as "None"
         if "None" in opts:
             opts.remove("None")
